@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @posts = @group.posts
   end
 
   def edit
@@ -46,7 +47,7 @@ class GroupsController < ApplicationController
   private
 
   def find_group_and_check_permission
-    @group = Group.find(params[:di])
+    @group = Group.find(params[:id])
     if current_user != @group.user
       redirect_to root_path, aler: "You have no permission."
     end
